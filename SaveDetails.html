@@ -1,0 +1,221 @@
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+
+</head>
+<body>
+
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
+
+    <form action="" method="post">
+        <p>
+            <label>Name</label>
+            <input type="text" name="name">
+        </p>
+        <p>
+            <label>Age</label>
+            <input type="number" name="age">
+        </p>
+        <p>
+            <label>Phone Number</label>
+            <input type="number" name="phone">
+        </p>
+        <p>
+            <label>Email Id</label>
+            <input type="email" name="email">
+        </p>
+
+        <p>
+            <label>Address</label>
+            <input type="text" name="address">
+        </p>
+
+
+        <p>
+            <input type="submit">
+        </p>
+
+
+    </form>
+
+
+
+
+<form action="/quiz1/" method="GET">
+    Quiz1<input name="quiz1" type="submit">
+</form>
+
+<form action="/quiz2/" method="GET">
+   Quiz2 <input name="quiz2" type="submit">
+</form>
+<h1>Admin Panel</h1>
+<form action="/admin/" method="POST">
+            Username:<input type="text" name="username">
+            Password:<input type="text" name="passowrd">
+   Submit<input name="admin" type="submit">
+</form>
+
+</body>
+</html>-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <style>
+        body
+        {
+          font-family: 'Lato', sans-serif;
+  font-size: 12px;
+  line-height: 1.8em;
+  text-transform: none;
+  letter-spacing: .075em;
+  font-weight: bold;
+  font-style: normal;
+  text-decoration: none;
+
+  background-color: rgba(0,0,0);
+  display: block;
+  }
+  h1
+  {
+
+  font-weight: 100;
+  font-size: 3rem;
+  color:aqua;
+  font-family: 'Lato', sans-serif;
+}
+
+    </style>
+    <script type="text/javascript">
+        window.history.forward();
+        function noBack() {
+            window.history.forward();
+        }
+    </script>
+</head>
+<body>
+<div class="container">
+<center><h1>CreateToCode</h1></center>
+
+
+    <div class="row">
+    <div class="col-lg-3">
+        <!--empty space-->
+    </div>
+
+        <div class="col-lg-6" style="margin-top:100px;">
+
+            {% if message1 %}
+        <h4 style="color:white;padding-left:20px;">{{ message }}</h4>
+
+                <div class="col-lg-12">
+          <form action="/quiz2/" method="GET">
+                <button name="quiz2" type="submit" class="btn btn-success">Quiz2</button>
+          </form></div>
+
+
+    {% endif %}
+            {% if message2 %}
+        <h4 style="color:white;padding-left:20px;">{{ message }}</h4>
+
+                <div class="col-lg-12">
+          <form action="/quiz1/" method="GET">
+                <button name="quiz1" type="submit" class="btn btn-success">Quiz1</button>
+          </form></div>
+
+
+    {% endif %}
+
+      <center>        <svg width="5em" height="5em" viewBox="0 0 16 16" class="bi bi-person-circle" fill="aqua" xmlns="http://www.w3.org/2000/svg">
+  <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"/>
+  <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+  <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/>
+      </svg></center>
+
+  <form action="" method="post">
+    <div class="form-group">
+
+      <input type="text" class="form-control" id="name" placeholder="Enter name" name="name">
+    </div>
+    <div class="form-group">
+
+      <input type="number" class="form-control" id="age" placeholder="Enter Age" name="age">
+    </div>
+    <div class="form-group">
+
+      <input type="number" class="form-control" id="phone" placeholder="Enter Phone number" name="phone">
+    </div>
+    <div class="form-group">
+
+      <input type="email" class="form-control" id="email" placeholder="Enter Email" name="email">
+    </div>
+    <div class="form-group">
+
+      <input type="text" class="form-control" id="address" placeholder="Enter Address" name="address">
+    </div>
+
+    <center><button type="submit" class="btn btn-primary" style="background-color:black;color:aqua;font-weight:bold;">Submit</button></center>
+  </form>
+        </div>
+<div class="col-lg-3">
+        <!--empty space-->
+    </div>
+
+</div>
+</div>
+</body>
+</html>
+
+
+
+
+
+<!--
+<div class="col-lg-2">
+            <form action="/quiz1/" method="GET">
+                <button name="quiz1" type="submit" class="btn btn-success">Quiz1</button>
+</form>
+
+
+            </div>
+            <div class="col-lg-2">
+                <form action="/quiz2/" method="GET">
+                    <button name="quiz2" type="submit" class="btn btn-success">Quiz2 </button>
+</form>
+-->
+
+<!--
+<div class="row">
+                <div class="col-lg-6">
+<h5 style="color:white;">Student Details</h5>
+
+            </div>
+                <div class="col-lg-2">
+                    <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+</svg>
+                </div>
+            <div class="col-lg-2">
+            <form action="/quiz1/" method="GET">
+                <button name="quiz1" type="submit" class="btn btn-success">Quiz1</button>
+</form>
+
+
+            </div>
+            <div class="col-lg-2">
+                <form action="/quiz2/" method="GET">
+                    <button name="quiz2" type="submit" class="btn btn-success">Quiz2 </button>
+</form>
+
+            </div>
+            </div>-->
