@@ -5,24 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='js/typed.js') }}">
+    <script type="text/javascript" src="../static/js/typed.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-    <script>
-        var typed = new Typed('#type', {
-            strings: ["a","sdcsdv","Adadad"],
-            typeSpeed:60,
-            backSpeed:60,
-            loop:true
-        });
-
-        window.history.forward();
-        function noBack() {
-            window.history.forward();
-        }
-    </script>
   </head>
 <style>
 
@@ -40,11 +27,6 @@
         margin-top: 150px;
     }
 
-    body {
-        background-image: url('../static/image/background.jpg');
-        overflow-x: hidden;
-    }
-
     .form{
         background: transparent;
         color: #fff;
@@ -56,6 +38,7 @@
     }
 
     body{
+        background-image: url('../static/image/background.jpg');
         font-family: 'Lato', sans-serif;
         font-size: 12px;
         line-height: 1.8em;
@@ -64,9 +47,10 @@
         font-weight: bold;
         font-style: normal;
         text-decoration: none;
-        background-color: rgba(0,0,0);
+        background-color: rgba(0,0,0,0);
         display: block;
         height: 100%;
+        overflow-x: hidden;
     }
 
     .input{
@@ -142,15 +126,15 @@
         <div class="row">
             <div class="col-sm-6 div1">
                 <center><h1 style="font-family:'Courgette';font-size:2.3em;"><span style="color:aqua;">{</span> <span class="type" style="color:white;"></span><span style="color:aqua;">}</span></h1></center>
-                <script type="text/javascript" src="../static/js/typed.js"></script>
-                <script type="text/javascript">
+                {#<script type="text/javascript" src="../static/js/typed.js"></script>#}
+                {#<script type="text/javascript">
                     var typed = new Typed('.type', {
-                    strings: ['CreateToCode.com'],
-                    typeSpeed:60,
-                    backSpeed:60,
-                    loop:true
-                });
-                </script>
+                        strings: ['CreateToCode.com'],
+                        typeSpeed:60,
+                        backSpeed:60,
+                        loop:true
+                    });
+                </script>#}
             </div>
 
         <div class="col-sm-6">
@@ -206,6 +190,7 @@
                         <div class="form-group">
                             <input type="text" class="form-control" id="address" placeholder="Enter Address" name="address" class="input">
                         </div>
+                        <input type="hidden" id="companyName" name = "companyName">
 
                         <center><button type="submit" class="btn btn-primary" style="background-color:black;color:aqua;font-weight:bold;">Submit</button></center>
                     </form>
@@ -267,42 +252,51 @@
         </div>
 
 </body>
-
 <script>
-    $("#messageId").hide();
-    $("#registerId").show();
-    var message1 = "{{ message1 }}";
-    var message2 = "{{ message2 }}";
-    console.log("message1L " + message1 + " message2: " + message2)
-    if (message1 || message2) {
+       var typed = new Typed('.type', {
+            strings: ['CreateToCode.com'],
+            typeSpeed:60,
+            backSpeed:60,
+            loop:true
+        });
 
-        $("#messageId").show();
-        $("#registerId").hide();
-    }
+        const params = new URLSearchParams(window.location.search);
+        console.log("link val: "+params.get("link"));
 
-    if (message1) {
-        splitMessage('firstPart1', 'nameValue1', 'secondPart1');
-    }
+        $('#companyName').val(params.get("link"));
 
-    if (message2) {
-        splitMessage('firstPart2', 'nameValue2', 'secondPart2');
-    }
+        $("#messageId").hide();
+        $("#registerId").show();
+        var message1 = "{{ message1 }}";
+        var message2 = "{{ message2 }}";
+        console.log("message1L " + message1 + " message2: " + message2)
+        if (message1 || message2) {
 
-    function splitMessage(id1, id2, id3) {
-        let respMessage = "{{ message }}";
-        let message = respMessage.split(" ");
-        let name = message[2];
-        let firstPart = respMessage.substring(0, 10);
-        let secondPart = respMessage.substring(firstPart.length + name.length);
+            $("#messageId").show();
+            $("#registerId").hide();
+        }
 
-        console.log("name: " + name + " firstpart: " + firstPart + " second part: " + secondPart);
-        document.getElementById(id1).innerHTML = firstPart;
-        document.getElementById(id2).innerHTML = name;
-        document.getElementById(id3).innerHTML = secondPart;
-    }
+        if (message1) {
+            splitMessage('firstPart1', 'nameValue1', 'secondPart1');
+        }
 
+        if (message2) {
+            splitMessage('firstPart2', 'nameValue2', 'secondPart2');
+        }
 
-</script>
+        function splitMessage(id1, id2, id3) {
+            let respMessage = "{{ message }}";
+            let message = respMessage.split(" ");
+            let name = message[2];
+            let firstPart = respMessage.substring(0, 10);
+            let secondPart = respMessage.substring(firstPart.length + name.length);
+
+            console.log("name: " + name + " firstpart: " + firstPart + " second part: " + secondPart);
+            document.getElementById(id1).innerHTML = firstPart;
+            document.getElementById(id2).innerHTML = name;
+            document.getElementById(id3).innerHTML = secondPart;
+        }
+    </script>
 </html>
 
 

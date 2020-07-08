@@ -9,19 +9,47 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                function disablePrev() { window.history.forward() }
+                window.onload = disablePrev();
+                window.onpageshow = function(evt) { if (evt.persisted) disableBack() }
+            });
+
+            function startTimer(duration, display) {
+                var timer = duration, minutes, seconds;
+                setInterval(function () {
+                    minutes = parseInt(timer / 60, 10)
+                    seconds = parseInt(timer % 60, 10);
+
+                    minutes = minutes < 10 ? "0" + minutes : minutes;
+                    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                    display.text(minutes + ":" + seconds);
+
+                    if (--timer < 0) {
+                        timer = duration;
+                    }
+                }, 1000);
+            }
+
+            jQuery(function ($) {
+                var fiveMinutes = 60 * 5,
+                    display = $('#time');
+                startTimer(fiveMinutes, display);
+            });
+        </script>
+
+        <style>
+            body {
+                background-image: url('../static/image/background.jpg');
+                overflow-x: hidden;
+                background-repeat: no-repeat;
+            }
+        </style>
     </head>
-    <script type="text/javascript">
-        window.history.forward();
-        function noBack() {
-            window.history.forward();
-        }
-    </script>
-    <style>
-        body {
-            background-image: url('../static/image/background.jpg');
-            overflow-x: hidden;
-        }
-    </style>
     <body>
 
     {#
@@ -36,7 +64,7 @@
         </ol>
         <input type="submit" value="submit" />
     </form>#}
-
+    <div style="float: right; color: white"> Quiz ends in <span id="time">05:00</span> minutes!</div>
     <div class="col-lg-6" style="margin-left: 25%">
         <div class="card shadow-lg border-0 rounded-lg">
             <div class="login-header"><h3 class="text-center font-weight-light my-3"><b>Quiz</b></h3></div>

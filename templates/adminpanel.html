@@ -18,10 +18,11 @@
     </style>
 
     <script type="text/javascript">
-        window.history.forward();
-        function noBack() {
-            window.history.forward();
-        }
+       $(document).ready(function() {
+            function disablePrev() { window.history.forward() }
+            window.onload = disablePrev();
+            window.onpageshow = function(evt) { if (evt.persisted) disableBack() }
+        });
     </script>
 </head>
 

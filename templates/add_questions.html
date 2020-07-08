@@ -10,14 +10,55 @@
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 
+<script>
+    $(document).ready(function() {
+        function disablePrev() { window.history.forward() }
+        window.onload = disablePrev();
+        window.onpageshow = function(evt) { if (evt.persisted) disableBack() }
+    });
 
-</head>
-<script type="text/javascript">
-    window.history.forward();
-    function noBack() {
-        window.history.forward();
+    $("#addQuestions").hide();
+    $("#createButtons").hide();
+
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+
+    function showHome() {
+        $("#home").show();
+        $("#createButtons").hide();
+        $("#addQuestions").hide();
+    }
+
+    function addQuestions() {
+        $("#addQuestions").show();
+        $("#createButtons").hide();
+        $("#home").hide();
+    }
+
+    function createButtonsDiv() {
+        $("#createButtons").show();
+        $("#addQuestions").hide();
+        $("#home").hide();
+    }
+
+    function createButtons() {
+        let buttonName = document.getElementById("createButton").value;
+        let buttonElement = document.createElement('button');
+        let buttonText = document.createTextNode(buttonName);
+        buttonElement.id = buttonName;
+        buttonElement.className = "btn btn-primary col-lg-5";
+        buttonElement.appendChild(buttonText);
+        document.getElementById("createdButtons").appendChild(buttonElement);
+        document.getElementById("createButton").value = "";
+
+        buttonElement.onclick = function () {
+            window.open("http://127.0.0.1:5000/?link="+buttonName)
+        }
     }
 </script>
+</head>
 <style>
     .mt-n1 {
       margin-top: 3rem !important;
@@ -126,7 +167,17 @@
 
                 {{ message }}
                 <form action="/addQuestions/" method="POST">
-                    <div class="form-group">
+                    <div class="form-check-inline">
+                      <label class="form-check-label" for="radio1">
+                        <input type="radio" class="form-check-input" id="radio1" name="optradio" value="0" checked>Age < 10
+                      </label>
+                    </div>
+                    <div class="form-check-inline">
+                      <label class="form-check-label" for="radio2">
+                        <input type="radio" class="form-check-input" id="radio2" name="optradio" value="1">Age > 10
+                      </label>
+                    </div>
+                    <div class="form-group mt-3">
                         <label for="inputEmailAddress"><b>Question</b></label>
                         <input class="form-control" id="question" name = "question" type="text" placeholder="Enter question"/>
                     </div>
@@ -165,7 +216,7 @@
                     <input type = "submit" class="btn btn-primary" onclick="createButtons();" value = "Create Button"/>
                 </div>
 
-                <div class="col-lg-6" id = "createdButtons">
+                <div class="col-lg-12" id = "createdButtons">
 
                 </div>
             </div>
@@ -181,44 +232,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
 
   <!-- Menu Toggle Script -->
-  <script>
-      $("#addQuestions").hide();
-      $("#createButtons").hide();
-
-    $("#menu-toggle").click(function(e) {
-      e.preventDefault();
-      $("#wrapper").toggleClass("toggled");
-    });
-
-    function showHome() {
-        $("#home").show();
-        $("#createButtons").hide();
-        $("#addQuestions").hide();
-    }
-
-    function addQuestions() {
-        $("#addQuestions").show();
-        $("#createButtons").hide();
-        $("#home").hide();
-    }
-
-    function createButtonsDiv() {
-        $("#createButtons").show();
-        $("#addQuestions").hide();
-        $("#home").hide();
-    }
-
-    function createButtons() {
-        let buttonName = document.getElementById("createButton").value;
-        let buttonElement = document.createElement('button');
-        let buttonText = document.createTextNode(buttonName);
-        buttonElement.id = buttonName;
-        buttonElement.className = "btn btn-primary col-sm-3";
-        buttonElement.appendChild(buttonText);
-        document.getElementById("createdButtons").appendChild(buttonElement);
-        document.getElementById("createButton").value = "";
-    }
-  </script>
 
 </body>
 

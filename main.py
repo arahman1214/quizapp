@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request,redirect
 import math,copy,random,csv
+import json
 import time
 import speedtest
 import logging
@@ -34,7 +35,6 @@ Question_bank2 = {
  'Machu Picchu':['Cuzco Region','Lima','Piura','Tacna'],
  'Egypt Pyramids':['Giza','Suez','Luxor','Tanta'],
  'Colosseum':['Rome','Milan','Bari','Bologna'],
- 'Christ the Redeemer':['Rio de Janeiro','Natal','Olinda','Betim']
 }
 
 original_questions1={}
@@ -70,6 +70,16 @@ while True:
         c1 = c1 + 1
 questions2 = copy.deepcopy(original_questions2)
 
+def csvToJson():
+    csvFilePath = 'StudentDetails.csv'
+    data = {}
+    with open(csvFilePath) as csvFile:
+        csvReader = csv.DictReader(csvFile)
+        for rows in csvReader:
+            id = rows['id']
+            data[id] = rows
+    logger.info(data)
+    return data
 
 def shuffle(q):
  """
@@ -99,6 +109,9 @@ def login():
         email = request.form.get('email')
         address = request.form.get('address')
 
+        if request.form.get('companyName'):
+            companyName = request.form.get('companyName')
+
         if name == '' or  age == '' or  phone == '' or  email == '' or  address == '':
             message = "Please Fill all the details"
 
@@ -116,6 +129,8 @@ def login():
         datalist.append(phone)
         datalist.append(email)
         datalist.append(address)
+        datalist.append(companyName)
+        logger.info(datalist)
     return render_template('SaveDetails.html',message=message,message1=message1,message2=message2)
 
 
@@ -159,15 +174,12 @@ def quiz1_answers():
 
 
 def datasave(datalist):
-    fieldnames = ['name', 'age','phone','email','address','score','speed']
+    fieldnames = ['name', 'age','phone','email','address','score', 'Company Name', 'speed']
 
-    with open('StudentDetails.csv', 'a') as inFile:
+    with open(datalist[5]+'.csv', 'a') as inFile:
         writer = csv.DictWriter(inFile, fieldnames=fieldnames)
-
-
-        writer.writerow({'name': datalist[0], 'age': datalist[1],'phone':datalist[2],'email':datalist[3],'address':datalist[4],'score':datalist[5]
-                         , 'speed': datalist[6]})
-
+        writer.writerow({'name': datalist[0], 'age': datalist[1],'phone':datalist[2],'email':datalist[3],'address':datalist[4],'score':datalist[6]
+                         , 'Company Name': datalist[5], 'speed': datalist[7]})
 
 @app.route('/quiz2/')
 def quiz2():
@@ -215,14 +227,16 @@ def addQuestions():
         option2 = request.form.get('option2')
         option3 = request.form.get('option3')
         option4 = request.form.get('option4')
-        age = 8
+        age = request.form.get('optradio')
         #ageGroup = request.form.get('ageGroup')
         optionsList.extend({option1, option2, option3, option4})
         logger.info(optionsList)
 
-        if age < 10:
+        if age == "0":
             Question_bank1.update({question: optionsList})
             message = "question added successfully for less than 10"
+            logger.info(Question_bank1)
+            logger.info(message)
             return render_template('add_questions.html', message=message)
         else:
             Question_bank2.update({question: optionsList})
