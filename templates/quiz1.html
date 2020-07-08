@@ -16,6 +16,12 @@
             window.history.forward();
         }
     </script>
+    <style>
+        body {
+            background-image: url('../static/image/background.jpg');
+            overflow-x: hidden;
+        }
+    </style>
     <body>
 
     {#
@@ -31,11 +37,11 @@
         <input type="submit" value="submit" />
     </form>#}
 
-    <div class="col-lg-6">
+    <div class="col-lg-6" style="margin-left: 25%">
         <div class="card shadow-lg border-0 rounded-lg">
             <div class="login-header"><h3 class="text-center font-weight-light my-3"><b>Quiz</b></h3></div>
             <div class="card-body">
-                <form action="/quiz2_answers/" method="post">
+                <form action="/quiz1_answers/" method="post">
                     <ol>
                         {% for i in q %}
                             <div>
@@ -72,13 +78,14 @@
                             <label class="form-check-label my-2" for="materialUnchecked">{{ j }}</label>
                         </div>
                     {% endfor %}#}
+                    <div class="card-footer text-center mt-2">
+                        <div class="form-group mt-3 mb-0 col-lg-3">
+                            <input type = "submit" class="btn btn-primary btn-block" value = "Submit">
+                        </div>
+                    </div>
                 </form>
             </div>
-            <div class="card-footer text-center mt-2">
-                <div class="form-group mt-3 mb-0 col-lg-3">
-                    <input type = "submit" class="btn btn-primary btn-block" value = "Submit">
-                </div>
-            </div>
+
         </div>
     </div>
 </body>

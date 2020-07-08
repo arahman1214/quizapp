@@ -16,6 +16,12 @@
             window.history.forward();
         }
     </script>
+    <style>
+        body {
+            background-image: url('../static/image/background.jpg');
+            overflow-x: hidden;
+        }
+    </style>
     <body>
         {#<form action='/quiz2_answers/' method='POST'>
             <ol>
@@ -70,13 +76,14 @@
                                 <label class="form-check-label my-2" for="materialUnchecked">{{ j }}</label>
                             </div>
                         {% endfor %}#}
+                    <div class="card-footer text-center mt-2">
+                        <div class="form-group mt-3 mb-0 col-lg-3">
+                            <input type = "submit" class="btn btn-primary btn-block" value = "Submit">
+                        </div>
+                    </div>
                     </form>
                 </div>
-                <div class="card-footer text-center mt-2">
-                    <div class="form-group mt-3 mb-0 col-lg-3">
-                        <input type = "submit" class="btn btn-primary btn-block" value = "Submit">
-                    </div>
-                </div>
+
             </div>
         </div>
     </body>
