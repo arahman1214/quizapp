@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='js/typed.js') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script>
+        var typed = new Typed('#type', {
+            strings: ["a","sdcsdv","Adadad"],
+            typeSpeed:60,
+            backSpeed:60,
+            loop:true
+        });
+
+        window.history.forward();
+        function noBack() {
+            window.history.forward();
+        }
+    </script>
+  </head>
+<style>
+
+	html {
+        height:100%;
+    }
+
+    .div1 {
+        margin-top: 300px;
+        width:100%;
+        float: left;
+    }
+
+    .div2 {
+        margin-top: 150px;
+    }
+
+    body {
+        background-image: url('../static/image/background.jpg');
+        overflow-x: hidden;
+    }
+
+    .form{
+        background: transparent;
+        color: #fff;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        width: 250px;
+
+    }
+
+    body{
+        font-family: 'Lato', sans-serif;
+        font-size: 12px;
+        line-height: 1.8em;
+        text-transform: none;
+        letter-spacing: .075em;
+        font-weight: bold;
+        font-style: normal;
+        text-decoration: none;
+        background-color: rgba(0,0,0);
+        display: block;
+        height: 100%;
+    }
+
+    .input{
+        margin: 20px 0;
+        padding: 10px;
+        background: transparent;
+        border: none;
+        outline: none;
+        color: #fff;
+        font-family: 'Raleway', sans-serif;
+    }
+    #name
+    {
+      background:transparent;
+      outline:none;
+    }
+
+    #age
+    {
+      background:transparent;
+      outline:none;
+    }
+
+    #phone
+    {
+      background:transparent;
+      outline:none;
+    }
+
+    #email
+    {
+      background:transparent;
+      outline:none;
+    }
+    #address
+    {
+      background:transparent;
+      outline:none;
+    }
+
+    h1 {
+        font-weight: 100;
+        font-size: 3rem;
+        color:aqua;
+        font-family: 'Lato', sans-serif;
+    }
+
+    .small {
+        font-size: 105%;
+        font-weight: 500;
+    }
+
+    .centerDiv {
+        padding: 15px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translateX(-50%) translateY(-50%);
+        -webkit-transform: translate(-50%,-50%);
+        transform: translate(-50%,-50%);
+    }
+
+    .vertical-center {
+        min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+        min-height: 100vh; /* These two lines are counted as one :-)       */
+
+        display: flex;
+        align-items: center;
+    }
+</style>
+  <body>
+    <div class="fluid-container">
+        <div class="row">
+            <div class="col-sm-6 div1">
+                <center><h1 style="font-family:'Courgette';font-size:2.3em;"><span style="color:aqua;">{</span> <span class="type" style="color:white;"></span><span style="color:aqua;">}</span></h1></center>
+                <script type="text/javascript" src="../static/js/typed.js"></script>
+                <script type="text/javascript">
+                    var typed = new Typed('.type', {
+                    strings: ['CreateToCode.com'],
+                    typeSpeed:60,
+                    backSpeed:60,
+                    loop:true
+                });
+                </script>
+            </div>
+
+        <div class="col-sm-6">
+            <center>
+                <div id = "messageId" class="div1">
+                {%  if message1 %}
+                    <h4 style="color:white;" id = "displayMessage">
+                        <p>
+                            <span id = "firstPart1"></span>
+                            <span id = "nameValue1" style="color: aqua; text-transform: capitalize"></span>
+                            <span id = "secondPart1"></span>
+                        </p>
+                    </h4>
+                    <div>
+                        <form action="/quiz2/" method="GET">
+                            <button name="quiz2" type="submit" class="btn btn-primary" style="background-color:black;color:aqua;font-weight:bold;">Quiz2</button>
+                        </form>
+                    </div>
+                {% endif %}
+                {% if message2 %}
+                    <h4 style="color:white;padding-left:20px;" id = "displayMessage1">
+                        <p>
+                            <span id = "firstPart2"></span>
+                            <span id = "nameValue2" style="color: aqua; text-transform: capitalize"></span>
+                            <span id = "secondPart2"></span>
+                        </p>
+                    </h4>
+                    <div>
+                        <form action="/quiz1/" method="GET">
+                            <center><button name="quiz1" type="submit" class="btn btn-primary" style="background-color:black;color:aqua;font-weight:bold;">Quiz1</button></center>
+                        </form>
+                    </div>
+                {% endif %}
+            </div>
+            </center>
+
+            <center>
+                <div id="registerId" class="div2">
+                    <h3>Register</h3>
+                    <form action="" method="post" class="form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="name" placeholder="Enter name" name="name" class="input">
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control" id="age" placeholder="Enter Age" name="age" class="input">
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control" id="phone" placeholder="Enter Phone number" name="phone" class="input">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="email" placeholder="Enter Email" name="email" class="input">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="address" placeholder="Enter Address" name="address" class="input">
+                        </div>
+
+                        <center><button type="submit" class="btn btn-primary" style="background-color:black;color:aqua;font-weight:bold;">Submit</button></center>
+                    </form>
+                </div>
+            </center>
+
+            {# <div class="col-lg-12 vertical-center" id = "registerId">
+                    <div class="card shadow-lg border-0 rounded-lg mt-4">
+                        <div class="login-header"><h3 class="text-center font-weight-light my-3"><b>Create Account</b></h3></div>
+                        <div class="card-body">
+                            <form action="" method="post">
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="small mb-1" for="inputFirstName">Name</label>
+                                            <input class="form-control py-3" id="name" type="text" placeholder="Enter name" name="name"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <p class="small mb-1" for="inputLastName">Age</p>
+                                            <input class="form-control py-3" id="age" type="number" placeholder="Enter age" name="age"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="small mb-1" for="inputEmailAddress">Email</label>
+                                    <input class="form-control py-3" id="email" type="email" aria-describedby="emailHelp" oninput="this.value = this.value.toLowerCase()" placeholder="Enter email address" name="email" />
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="small mb-1" for="phone">Phone</label>
+                                            <input class="form-control py-3" id="phone" type="number" maxlength="10" placeholder="Enter Phone number" name="phone"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="small mb-1" for="inputConfirmPassword">Address</label>
+                                            <input class="form-control py-3" id="address" type="text" placeholder="Enter Address" name="address"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group mt-3 mb-0">
+                                    <input type = "submit" class="btn btn-primary btn-block" value = "Register">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer text-center mt-2">
+
+                        </div>
+                    </div>
+                </div>#}
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <!--empty space-->
+        </div>
+        </div>
+
+</body>
+
+<script>
+    $("#messageId").hide();
+    $("#registerId").show();
+    var message1 = "{{ message1 }}";
+    var message2 = "{{ message2 }}";
+    console.log("message1L " + message1 + " message2: " + message2)
+    if (message1 || message2) {
+
+        $("#messageId").show();
+        $("#registerId").hide();
+    }
+
+    if (message1) {
+        splitMessage('firstPart1', 'nameValue1', 'secondPart1');
+    }
+
+    if (message2) {
+        splitMessage('firstPart2', 'nameValue2', 'secondPart2');
+    }
+
+    function splitMessage(id1, id2, id3) {
+        let respMessage = "{{ message }}";
+        let message = respMessage.split(" ");
+        let name = message[2];
+        let firstPart = respMessage.substring(0, 10);
+        let secondPart = respMessage.substring(firstPart.length + name.length);
+
+        console.log("name: " + name + " firstpart: " + firstPart + " second part: " + secondPart);
+        document.getElementById(id1).innerHTML = firstPart;
+        document.getElementById(id2).innerHTML = name;
+        document.getElementById(id3).innerHTML = secondPart;
+    }
+
+
+</script>
+</html>
+
+
+
+
+
+<!--
+<div class="col-lg-2">
+            <form action="/quiz1/" method="GET">
+                <button name="quiz1" type="submit" class="btn btn-success">Quiz1</button>
+</form>
+
+
+            </div>
+            <div class="col-lg-2">
+                <form action="/quiz2/" method="GET">
+                    <button name="quiz2" type="submit" class="btn btn-success">Quiz2 </button>
+</form>
+-->
+
+<!--
+<div class="row">
+                <div class="col-lg-6">
+<h5 style="color:white;">Student Details</h5>
+
+            </div>
+                <div class="col-lg-2">
+                    <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+</svg>
+                </div>
+            <div class="col-lg-2">
+            <form action="/quiz1/" method="GET">
+                <button name="quiz1" type="submit" class="btn btn-success">Quiz1</button>
+</form>
+
+
+            </div>
+            <div class="col-lg-2">
+                <form action="/quiz2/" method="GET">
+                    <button name="quiz2" type="submit" class="btn btn-success">Quiz2 </button>
+</form>
+
+            </div>
+            </div>-->

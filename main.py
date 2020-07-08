@@ -2,8 +2,8 @@ from flask import Flask, render_template, request,redirect
 import math,copy,random,csv
 import time
 import speedtest
-
-
+import logging
+from requests.models import Response
 
 
 
@@ -11,6 +11,9 @@ import speedtest
 app = Flask(__name__)
 # ...
 
+logging.basicConfig(filename="newfile.log", format='%(asctime)s %(message)s', filemode='w')
+logger=logging.getLogger()
+logger.setLevel(logging.DEBUG)
 
 Question_bank1 = {
  #Format is 'question':[options]
@@ -171,6 +174,9 @@ def quiz2():
  questions_shuffled = shuffle(questions2)
  for i in questions2.keys():
   random.shuffle(questions2[i])
+
+ logger.info("quesions shuffled: ", questions_shuffled)
+ logger.info("quesions2: ", questions2)
  return render_template('quiz2.html', q=questions_shuffled, o=questions2)
 
 @app.route('/quiz2_answers/', methods=['POST'])
@@ -199,6 +205,30 @@ def save_internet_speed():
     datalist.append(final_speed)
 
 
+@app.route('/addQuestions/', methods=['POST'])
+def addQuestions():
+    message = ''
+    if request.method == "POST":
+        optionsList = []
+        question = request.form.get('question')
+        option1 = request.form.get('option1')
+        option2 = request.form.get('option2')
+        option3 = request.form.get('option3')
+        option4 = request.form.get('option4')
+        age = 8
+        #ageGroup = request.form.get('ageGroup')
+        optionsList.extend({option1, option2, option3, option4})
+        logger.info(optionsList)
+
+        if age < 10:
+            Question_bank1.update({question: optionsList})
+            message = "question added successfully for less than 10"
+            return render_template('add_questions.html', message=message)
+        else:
+            Question_bank2.update({question: optionsList})
+            message = "question added successfully for greater than 10"
+            return render_template('add_questions.html', message=message)
+
 
 if __name__ == '__main__':
- app.run(debug=True)
+    app.run(debug=True)
