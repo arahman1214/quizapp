@@ -7,14 +7,26 @@ import logging
 from requests.models import Response
 
 
-
-
 app = Flask(__name__)
 # ...
 
 logging.basicConfig(filename="newfile.log", format='%(asctime)s %(message)s', filemode='w')
 logger=logging.getLogger()
 logger.setLevel(logging.DEBUG)
+
+jsonData = {}
+
+def csvToJson():
+    csvFilePath = 'StudentDetails.csv'
+    data = {}
+    with open(csvFilePath) as csvFile:
+        csvReader = csv.DictReader(csvFile)
+        for rows in csvReader:
+            logger.info(rows)
+            data.update(rows)
+    return csvReader
+
+csvToJson()
 
 Question_bank1 = {
  #Format is 'question':[options]
@@ -42,7 +54,6 @@ original_questions2={}
 datalist=[]
 c=0
 l=[]
-
 while True:
     if (c >=5):
         break
@@ -70,17 +81,6 @@ while True:
         c1 = c1 + 1
 questions2 = copy.deepcopy(original_questions2)
 
-def csvToJson():
-    csvFilePath = 'StudentDetails.csv'
-    data = {}
-    with open(csvFilePath) as csvFile:
-        csvReader = csv.DictReader(csvFile)
-        for rows in csvReader:
-            id = rows['id']
-            data[id] = rows
-    logger.info(data)
-    return data
-
 def shuffle(q):
  """
  This function is for shuffling
@@ -102,6 +102,8 @@ def login():
     message2=''
     message=''
     c=0
+    companyName = ''
+
     if request.method == 'POST':
         name = request.form.get('name')  # access the data inside
         age = request.form.get('age')
@@ -180,6 +182,9 @@ def datasave(datalist):
         writer = csv.DictWriter(inFile, fieldnames=fieldnames)
         writer.writerow({'name': datalist[0], 'age': datalist[1],'phone':datalist[2],'email':datalist[3],'address':datalist[4],'score':datalist[6]
                          , 'Company Name': datalist[5], 'speed': datalist[7]})
+        jsonData.update({'name': datalist[0], 'age': datalist[1],'phone':datalist[2],'email':datalist[3],'address':datalist[4],'score':datalist[6]
+                         , 'Company Name': datalist[5], 'speed': datalist[7]})
+    logger.info(jsonData)
 
 @app.route('/quiz2/')
 def quiz2():
